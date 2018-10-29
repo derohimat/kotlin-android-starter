@@ -30,19 +30,19 @@ class MainActivity : BaseActivity(), MainMvpView, PokemonAdapter.ClickListener, 
         mainPresenter.attachView(this)
 
         setSupportActionBar(main_toolbar)
-        swipeToRefresh.apply {
+        swipeToRefresh?.apply {
             setProgressBackgroundColorSchemeResource(R.color.primary)
             setColorSchemeResources(R.color.white)
             setOnRefreshListener { mainPresenter.getPokemon(POKEMON_COUNT) }
         }
 
         pokemonAdapter.setClickListener(this)
-        recyclerPokemon.apply {
+        recyclerPokemon?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = pokemonAdapter
         }
 
-        viewError.setErrorListener(this)
+        viewError?.setErrorListener(this)
 
         mainPresenter.getPokemon(POKEMON_COUNT)
     }
@@ -60,31 +60,31 @@ class MainActivity : BaseActivity(), MainMvpView, PokemonAdapter.ClickListener, 
             notifyDataSetChanged()
         }
 
-        recyclerPokemon.visible()
-        swipeToRefresh.visible()
+        recyclerPokemon?.visible()
+        swipeToRefresh?.visible()
     }
 
     override fun showProgress(show: Boolean) {
         if (show) {
-            if (recyclerPokemon.visibility == View.VISIBLE && pokemonAdapter.itemCount > 0) {
-                swipeToRefresh.isRefreshing = true
+            if (recyclerPokemon?.visibility == View.VISIBLE && pokemonAdapter.itemCount > 0) {
+                swipeToRefresh?.isRefreshing = true
             } else {
-                progressBar.visible()
-                recyclerPokemon.gone()
-                swipeToRefresh.gone()
+                progressBar?.visible()
+                recyclerPokemon?.gone()
+                swipeToRefresh?.gone()
             }
 
-            viewError.gone()
+            viewError?.gone()
         } else {
-            swipeToRefresh.isRefreshing = false
-            progressBar.gone()
+            swipeToRefresh?.isRefreshing = false
+            progressBar?.gone()
         }
     }
 
     override fun showError(error: Throwable) {
-        recyclerPokemon.gone()
-        swipeToRefresh.gone()
-        viewError.visible()
+        recyclerPokemon?.gone()
+        swipeToRefresh?.gone()
+        viewError?.visible()
         Timber.e(error, "There was an error retrieving the pokemon")
     }
 

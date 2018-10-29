@@ -56,7 +56,7 @@ class MainActivityTest {
         onView(withText(pokemonList[0]))
                 .perform(click())
 
-        onView(withId(R.id.image_pokemon))
+        onView(withId(R.id.pokemon_name))
                 .check(matches(isDisplayed()))
     }
 
